@@ -4,26 +4,23 @@ import {
   H1,
   Paragraph,
   Separator,
-  Sheet,
-  useToastController,
   XStack,
   YStack,
 } from '@my/ui'
-import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
-import React, { useState } from 'react'
+import React from 'react'
 import { useLink } from 'solito/link'
+import { HomeSheet } from './sheet'
 
 export function HomeScreen() {
   const linkProps = useLink({
-    href: '/user/nate',
+    href: '/stack/1',
   })
 
   return (
     <YStack f={1} jc="center" ai="center" p="$4" space>
       <YStack space="$4" maw={600}>
-        <H1 ta="center">On The Spot 🔦</H1>
+        <H1 ta="center">10 x 10</H1>
         <Paragraph ta="center">This is the home screen.</Paragraph>
-
         <Separator />
         <Paragraph ta="center">
           Developed by{' '}
@@ -34,53 +31,10 @@ export function HomeScreen() {
       </YStack>
 
       <XStack>
-        <Button {...linkProps}>Link to user</Button>
+        <Button {...linkProps}>Link to Cards 🃏</Button>
       </XStack>
 
-      <SheetDemo />
+      <HomeSheet />
     </YStack>
-  )
-}
-
-function SheetDemo() {
-  const [open, setOpen] = useState(false)
-  const [position, setPosition] = useState(0)
-  const toast = useToastController()
-
-  return (
-    <>
-      <Button
-        size="$6"
-        icon={open ? ChevronDown : ChevronUp}
-        circular
-        onPress={() => setOpen((x) => !x)}
-      />
-      <Sheet
-        modal
-        animation="medium"
-        open={open}
-        onOpenChange={setOpen}
-        snapPoints={[80]}
-        position={position}
-        onPositionChange={setPosition}
-        dismissOnSnapToBottom
-      >
-        <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
-        <Sheet.Frame ai="center" jc="center">
-          <Sheet.Handle />
-          <Button
-            size="$6"
-            circular
-            icon={ChevronDown}
-            onPress={() => {
-              setOpen(false)
-              toast.show('Sheet closed!', {
-                message: 'Just showing how toast works...',
-              })
-            }}
-          />
-        </Sheet.Frame>
-      </Sheet>
-    </>
   )
 }

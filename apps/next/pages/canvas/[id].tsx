@@ -1,4 +1,4 @@
-import { UserDetailScreen } from 'app/features/user/detail-screen'
+import { UserDetailScreen } from 'app/features/block/block-screen'
 import Head from 'next/head'
 
 export default function Page() {
